@@ -1,11 +1,16 @@
 package fr.isima.ejb.container;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.reflections.Reflections;
+import org.reflections.scanners.FieldAnnotationsScanner;
+
+import fr.isima.ejb.container.annotations.EJB;
 
 public class Container {
 	private static  Container contanier = null;
@@ -37,6 +42,8 @@ public class Container {
 
 	private void handleEjbAnnotation(Object client) {
 		// get all fields having @EJB annotation
+		Reflections reflections = new Reflections( client.getClass().getName(), new FieldAnnotationsScanner()) ;
+		Set<Field> fields = reflections.getFieldsAnnotatedWith( EJB.class );
 		// foreach field
 		// create proxy for that ejb
 		// inject the proxy
