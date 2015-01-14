@@ -19,6 +19,12 @@ public class ContainerTest {
 		ejbClient = new EjbClient();
 	}
 	@Test
+	public void ejbInterfaceToClasseTest() throws ClassNotFoundException{
+		Class<?> classeFromMap = ejbContainer.getInterfaceToClass().get("fr.isima.ejb.container.tests.mocks.StatelessBeanInterface");
+		Assert.assertEquals(classeFromMap.getName(), "fr.isima.ejb.container.tests.mocks.StatelessBean");
+	}
+	/*
+	@Test
 	public void ejbInjectionTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
 		ejbContainer.handleAnnotations(ejbClient);
@@ -35,7 +41,7 @@ public class ContainerTest {
 		// call our container to handle this instance (handle the @EJB annotations)
 		// tell the container to delete an ejb
 		// check if the state attribute of the this ejb is setted to "Pre Destroyed"
-	}
+	}*/
 	@After
 	public void destroy(){
 		ejbClient = null;
