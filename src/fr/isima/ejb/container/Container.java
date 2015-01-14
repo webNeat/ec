@@ -1,11 +1,12 @@
 package fr.isima.ejb.container;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.reflections.Reflections;
+
+import fr.isima.ejb.container.annotations.Stateless;
 
 public class Container {
 	private static  Container contanier = null;
@@ -15,9 +16,9 @@ public class Container {
 		return contanier;
 	}
 	
-	private Map<Class<?>, Class<?>> interfaceToClass;
+	private Map<String, Class<?>> interfaceToClass;
 	private Container() {
-		interfaceToClass = new HashMap<Class<?>, Class<?>>();
+		interfaceToClass = new HashMap<String, Class<?>>();
 		fillInterfaceToClass();
 	}
 
@@ -26,9 +27,21 @@ public class Container {
 		// and find the corresponding interface for each class then fill our map
 		// TODO ...
 		Reflections reflection = new Reflections();
-		List<Class<?>> classes = new ArrayList<Class<?>>();
+		Set<Class<?>> classes = reflection.getTypesAnnotatedWith(Stateless.class);
+		for(Class<?> ejbClasse : classes){
+			System.out.println("Classe : " + ejbClasse.getName());
+			Class<?> interfaces[] =  ejbClasse.getInterfaces();
+			for(Class<?> ejbInterface : interfaces){
+				//exception when the interface implemented by multiple classes
+
+				System.out.println("Interface : " + ejbInterface.getName());
+				interfaceToClass.put(ejbInterface.getName(), ejbClasse);
+			}
+		}
 		
-		
+	}
+	public Map<String, Class<?>> getInterfaceToClass() {
+		return interfaceToClass;
 	}
 
 	public void handleAnnotations(Object client) {
