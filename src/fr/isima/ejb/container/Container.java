@@ -45,7 +45,14 @@ public class Container {
 	}
 
 	public void handleAnnotations(Object client) {
-		
+		handleEjbAnnotation(client);
+	}
+
+	private void handleEjbAnnotation(Object client) {
+		// get all fields having @EJB annotation
+		// foreach field
+		// create proxy for that ejb
+		// inject the proxy
 	}
 
 }
