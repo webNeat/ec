@@ -9,7 +9,6 @@ import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 
 import fr.isima.ejb.container.annotations.EJB;
-
 import fr.isima.ejb.container.annotations.Stateless;
 
 public class Container {
@@ -54,11 +53,34 @@ public class Container {
 
 	private void handleEjbAnnotation(Object client) {
 		// get all fields having @EJB annotation
-		Reflections reflections = new Reflections( client.getClass().getName(), new FieldAnnotationsScanner()) ;
-		Set<Field> fields = reflections.getFieldsAnnotatedWith( EJB.class );
-		// foreach field
-		// create proxy for that ejb
-		// inject the proxy
+		Set<Field> fields = AnnotationsHelper.getFieldsAnnotatedWith(client.getClass(), EJB.class );
+		for(Field field : fields){
+			Class<?> fieldInterface = field.getType();
+			if(interfaceToClass.containsKey(fieldInterface)){
+				// create proxy for that ejb
+				Object bean = getProxy(interfaceToClass.get(fieldInterface));
+				// inject the proxy
+				field.setAccessible(true);
+				try {
+					field.set(client, bean);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				// Throw some Exception ejb interafce not found 
+			}
+		}
+	}
+
+	private Object getProxy(Class<?> clientClass) {
+		Object bean = null;
+		// check the annotation of the ejb class
+		// for @stateless
+		if(AnnotationsHelper.isAnnotatedWith(clientClass, Stateless.class)){
+			bean = Beans.getInstance().make(clientClass);
+		}
+		return bean;
 	}
 
 }
