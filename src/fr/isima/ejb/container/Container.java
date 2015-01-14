@@ -1,6 +1,8 @@
 package fr.isima.ejb.container;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.reflections.Reflections;
@@ -23,7 +25,9 @@ public class Container {
 		// Loop over all classes annotated with @Stateless 
 		// and find the corresponding interface for each class then fill our map
 		// TODO ...
-		Reflections reflectio = new Reflections();
+		Reflections reflection = new Reflections();
+		List<Class<?>> classes = new ArrayList<Class<?>>();
+		
 		
 	}
 
