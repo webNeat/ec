@@ -9,7 +9,7 @@ import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 
 import fr.isima.ejb.container.annotations.EJB;
-
+import fr.isima.ejb.container.annotations.PersistenceContext;
 import fr.isima.ejb.container.annotations.Stateless;
 
 public class Container {
@@ -49,7 +49,13 @@ public class Container {
 	}
 
 	public void handleAnnotations(Object client) {
-		handleEjbAnnotation(client);
+		try {
+	//		handleEjbAnnotation(client);	
+			handlePersistenceAnnotation(client);	
+		} catch (Exception e) {
+			System.out.println("Erreur HandleAnnotations : " + e.getMessage());
+		}
+		
 	}
 
 	private void handleEjbAnnotation(Object client) {
@@ -59,6 +65,22 @@ public class Container {
 		// foreach field
 		// create proxy for that ejb
 		// inject the proxy
+	}
+	private void handlePersistenceAnnotation(Object client){
+		// get all fields having @PersistenceContext annotation
+		Reflections reflection = new Reflections(client.getClass().getName(), new FieldAnnotationsScanner()) ;
+		Set<Field> fields = reflection.getFieldsAnnotatedWith(PersistenceContext.class );
+		for(Field field : fields){
+			if(field.getType().getSimpleName().equals("EntityManager")) {
+				try{
+				field.setAccessible(true);
+				field.set(client, EntityManagerImp.getEntityManager());
+				}catch(Exception e){
+					System.out.println("Erreur Injection Entity Manager : " + e.getMessage());
+					
+				}
+			}
+		}
 	}
 
 }

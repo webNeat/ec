@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.isima.ejb.container.Container;
+import fr.isima.ejb.container.EntityManagerImp;
 import fr.isima.ejb.container.tests.mocks.EjbClient;
 
 public class ContainerTest {
@@ -19,9 +20,14 @@ public class ContainerTest {
 		ejbClient = new EjbClient();
 	}
 	@Test
-	public void ejbInterfaceToClasseTest() throws ClassNotFoundException{
+	public void ejbInterfaceToClasseTest(){
 		Class<?> classeFromMap = ejbContainer.getInterfaceToClass().get("fr.isima.ejb.container.tests.mocks.StatelessBeanInterface");
 		Assert.assertEquals(classeFromMap.getName(), "fr.isima.ejb.container.tests.mocks.StatelessBean");
+	}
+	@Test
+	public void emInjectionTest(){
+		ejbContainer.handleAnnotations(ejbClient);
+		Assert.assertTrue(ejbClient.getEntityManager() instanceof EntityManagerImp);
 	}
 	/*
 	@Test
