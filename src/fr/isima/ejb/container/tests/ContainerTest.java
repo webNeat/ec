@@ -1,21 +1,29 @@
 package fr.isima.ejb.container.tests;
 
+import java.lang.reflect.Proxy;
+
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-// create an interface and a class for an ejb
-// create a client class which uses the ejb
+import fr.isima.ejb.container.Container;
+import fr.isima.ejb.container.tests.mocks.EjbClient;
+
 public class ContainerTest {
-	// get an instance of our ebj container as attribute
+	private Container ejbContainer;
+	private EjbClient ejbClient;
 	@Before
 	public void init(){
-		// make an instance from the client class
+		ejbContainer = Container.getContanier();
+		ejbClient = new EjbClient();
 	}
 	@Test
 	public void ejbInjectionTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
-		// check if the beans were injected (the type of attributes is Proxy)		
+		ejbContainer.handleAnnotations(ejbClient);
+		// check if the beans were injected (the type of attributes is Proxy)
+		Assert.assertTrue(ejbClient.getStatelessEjb() instanceof Proxy);
 	}
 	@Test
 	public void ejbPostConstructTest(){
@@ -30,6 +38,6 @@ public class ContainerTest {
 	}
 	@After
 	public void destroy(){
-		// destroy the instance of client class
+		ejbClient = null;
 	}
 }
