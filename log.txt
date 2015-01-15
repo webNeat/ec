@@ -1,22 +1,43 @@
-20:43:07: Container: handleAnnotations: Handling annotations
-20:43:07: Container: handleEjbAnnotation: Handling @EJB annotations
-20:43:07: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
-20:43:07: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
-20:43:07: StatelessBean: <init>: Constructed
-20:43:07: Container: invokePostConstructMethods: Invoking the post construct methods
-20:43:07: Container: invokePostConstructMethods: Length : 0
-20:43:07: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
-20:43:07: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
-20:43:07: Container: invokePostConstructMethods: Invoking the post construct methods
-20:43:07: Container: invokePostConstructMethods: Length : 0
-20:50:50: Container: handleAnnotations: Handling annotations
-20:50:50: Container: handleEjbAnnotation: Handling @EJB annotations
-20:50:50: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
-20:50:50: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
-20:50:50: StatelessBean: <init>: Constructed
-20:50:50: Container: invokePostConstructMethods: Invoking the post construct methods
-20:50:50: Container: invokePostConstructMethods: Class : com.sun.proxy.$Proxy7
-20:50:50: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
-20:50:50: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
-20:50:50: Container: invokePostConstructMethods: Invoking the post construct methods
-20:50:50: Container: invokePostConstructMethods: Class : com.sun.proxy.$Proxy9
+22:36:11: Container: fillInterfaceToClass: Interface : StatelessBeanInterface class : StatelessBean
+22:36:11: Container: fillInterfaceToClass: local
+22:36:11: Container: fillInterfaceToClass: Interface : SingletonBeanInterface class : SingletonBean
+22:36:11: Container: fillInterfaceToClass: local
+22:36:11: Container: handleAnnotations: Handling annotations
+22:36:11: Container: handleEjbAnnotation: Handling @EJB annotations
+22:36:11: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+22:36:11: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+22:36:11: StatelessBean: <init>: Constructed
+22:36:11: Container: invokePostConstructMethods: Invoking the post construct methods
+22:36:11: Container: invokePostConstructMethods: Class : com.sun.proxy.$Proxy6
+22:36:11: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+22:36:11: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+22:36:11: Container: invokePostConstructMethods: Invoking the post construct methods
+22:36:11: Container: invokePostConstructMethods: Class : com.sun.proxy.$Proxy8
+22:36:11: Container: handleAnnotations: Handling annotations
+22:36:11: Container: handleEjbAnnotation: Handling @EJB annotations
+22:36:11: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+22:36:11: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+22:36:11: StatelessBean: <init>: Constructed
+22:36:11: Container: invokePostConstructMethods: Invoking the post construct methods
+22:36:12: Container: invokePostConstructMethods: Class : com.sun.proxy.$Proxy6
+22:36:12: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+22:36:12: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+22:36:12: Container: invokePostConstructMethods: Invoking the post construct methods
+22:36:12: Container: invokePostConstructMethods: Class : com.sun.proxy.$Proxy8
+22:36:12: Container: handleAnnotations: Handling annotations
+22:36:12: Container: handleEjbAnnotation: Handling @EJB annotations
+22:36:12: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+22:36:12: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+22:36:12: StatelessBean: <init>: Constructed
+22:36:12: Container: invokePostConstructMethods: Invoking the post construct methods
+22:36:12: Container: invokePostConstructMethods: Class : com.sun.proxy.$Proxy6
+22:36:12: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+22:36:12: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+22:36:12: Container: invokePostConstructMethods: Invoking the post construct methods
+22:36:12: Container: invokePostConstructMethods: Class : com.sun.proxy.$Proxy8
+22:36:12: Container: handleAnnotations: Handling annotations
+22:36:12: Container: handleEjbAnnotation: Handling @EJB annotations
+22:36:12: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+22:36:12: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+22:36:12: Container: invokePostConstructMethods: Invoking the post construct methods
+22:36:12: Container: invokePostConstructMethods: Class : com.sun.proxy.$Proxy8

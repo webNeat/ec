@@ -11,38 +11,57 @@ import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 
 import fr.isima.ejb.container.annotations.EJB;
+import fr.isima.ejb.container.annotations.Local;
 import fr.isima.ejb.container.annotations.PersistenceContext;
 import fr.isima.ejb.container.annotations.PostConstruct;
 import fr.isima.ejb.container.annotations.PreDestroy;
 import fr.isima.ejb.container.annotations.Singleton;
 import fr.isima.ejb.container.annotations.Stateless;
+import fr.isima.ejb.container.exceptions.LocalAllInterfacesUnfoundException;
+import fr.isima.ejb.container.exceptions.NoLocalInterfaceIsImplemented;
 import fr.isima.ejb.container.logging.Logger;
 
 public class Container {
 	private static  Container contanier = null;
-	public static Container getContanier() {
+	public static Container getContanier() throws LocalAllInterfacesUnfoundException, NoLocalInterfaceIsImplemented {
 		if(contanier == null)
 			contanier = new Container();
 		return contanier;
 	}
 	
 	private Map<String, Class<?>> interfaceToClass;
-	private Container() {
+	private Container() throws LocalAllInterfacesUnfoundException, NoLocalInterfaceIsImplemented {
 		interfaceToClass = new HashMap<String, Class<?>>();
 		fillInterfaceToClass();
 	}
 
-	private void fillInterfaceToClass() {
+	private void fillInterfaceToClass() throws LocalAllInterfacesUnfoundException, NoLocalInterfaceIsImplemented {
 		// Loop over all classes annotated with @Stateless 
 		// and find the corresponding interface for each class then fill our map
 		Set<Class<?>> classes = AnnotationsHelper.getClassesAnnotatedWith(Stateless.class);
 		classes.addAll(AnnotationsHelper.getClassesAnnotatedWith(Singleton.class));
 		for(Class<?> ejbClasse : classes){
 			Class<?> interfaces[] =  ejbClasse.getInterfaces();
-			for(Class<?> ejbInterface : interfaces){
-				// exception when the interface implemented by multiple classes
-				interfaceToClass.put(ejbInterface.getName(), ejbClasse);
+			if(interfaces.length > 0){
+				int taille = interfaces.length;
+				int cp = 0;
+				for(Class<?> ejbInterface : interfaces){
+					Logger.log("Interface : " + ejbInterface.getSimpleName() + " class : " + ejbClasse.getSimpleName());
+					if(AnnotationsHelper.isAnnotatedWith(ejbInterface, Local.class)){
+						interfaceToClass.put(ejbInterface.getName(), ejbClasse);
+						Logger.log("local");
+						break;
+					}
+					else
+						cp++;
+				}
+				if(taille == cp){
+					throw new LocalAllInterfacesUnfoundException(ejbClasse);
+				}
+			}else{
+				throw new NoLocalInterfaceIsImplemented(ejbClasse);
 			}
+			
 		}
 		
 	}

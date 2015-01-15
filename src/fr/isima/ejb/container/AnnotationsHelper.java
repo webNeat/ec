@@ -28,10 +28,6 @@ public class AnnotationsHelper {
 	}
 
 	public static boolean isAnnotatedWith(Class<?> clientClass,	Class<? extends Annotation> annotationClass) {
-		for( Annotation anno : clientClass.getDeclaredAnnotations() ){
-			if( annotationClass.isInstance(anno) )
-				return true;
-		}
-		return false;
+		return (clientClass.getAnnotation(annotationClass) != null);			
 	}
 }

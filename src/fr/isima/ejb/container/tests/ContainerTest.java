@@ -10,6 +10,9 @@ import org.junit.Test;
 
 import fr.isima.ejb.container.Container;
 import fr.isima.ejb.container.EntityManagerImp;
+import fr.isima.ejb.container.exceptions.LocalAllInterfacesUnfoundException;
+import fr.isima.ejb.container.exceptions.NoLocalInterfaceIsImplemented;
+import fr.isima.ejb.container.logging.Logger;
 import fr.isima.ejb.container.tests.mocks.EjbClient;
 import fr.isima.ejb.container.tests.mocks.EjblClientSingleton;
 import fr.isima.ejb.container.tests.mocks.StatelessBeanInterface;
@@ -20,11 +23,16 @@ public class ContainerTest {
 	private EjblClientSingleton ejbClientSingleton;
 	@Before
 	public void init(){
-		ejbContainer = Container.getContanier();
+		try {
+			ejbContainer = Container.getContanier();			
+		} catch (LocalAllInterfacesUnfoundException | NoLocalInterfaceIsImplemented e) {
+			Logger.log(e.getMessage());
+			Assert.assertTrue(false);
+		}
 		ejbClient = new EjbClient();
 		ejbClientSingleton = new EjblClientSingleton();
 	}
-	/*
+	
 	@Test
 	public void ejbInterfaceToClasseTest(){
 		Class<?> classeFromMap = ejbContainer.getInterfaceToClass().get("fr.isima.ejb.container.tests.mocks.StatelessBeanInterface");
@@ -53,7 +61,8 @@ public class ContainerTest {
 		Assert.assertTrue(ejbClientSingleton.getSingletonEjb() instanceof Proxy);
 		Assert.assertTrue(ejbClientSingleton.getSingletonEjb() == ejbClient.getSingletonEjb());	
 	}
-	*/
+
+	/*
 	@Test
 	public void ejbPostConstructTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
@@ -61,7 +70,6 @@ public class ContainerTest {
 		// check if the ebj was postConstructed
 		Assert.assertTrue(ejbClient.getStatelessEjb().isPostConstructed());
 	}
-	/*
 	@Test
 	public void ejbPreDestroyTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
