@@ -9,11 +9,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.isima.ejb.container.Container;
-import fr.isima.ejb.container.EJBHandler;
 import fr.isima.ejb.container.EntityManagerImp;
 import fr.isima.ejb.container.tests.mocks.EjbClient;
-import fr.isima.ejb.container.tests.mocks.StatelessBeanInterface;
 import fr.isima.ejb.container.tests.mocks.EjblClientSingleton;
+import fr.isima.ejb.container.tests.mocks.StatelessBeanInterface;
 
 public class ContainerTest {
 	private Container ejbContainer;
@@ -25,17 +24,18 @@ public class ContainerTest {
 		ejbClient = new EjbClient();
 		ejbClientSingleton = new EjblClientSingleton();
 	}
-	@Ignore
+	/*
+	@Test
 	public void ejbInterfaceToClasseTest(){
 		Class<?> classeFromMap = ejbContainer.getInterfaceToClass().get("fr.isima.ejb.container.tests.mocks.StatelessBeanInterface");
 		Assert.assertEquals(classeFromMap.getName(), "fr.isima.ejb.container.tests.mocks.StatelessBean");
 	}
-	@Ignore
+	@Test
 	public void emInjectionTest(){
 		ejbContainer.handleAnnotations(ejbClient);
 		Assert.assertTrue(ejbClient.getEntityManager() instanceof EntityManagerImp);
 	}
-	@Ignore
+	@Test
 	public void ejbInjectionTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
 		ejbContainer.handleAnnotations(ejbClient);
@@ -47,12 +47,13 @@ public class ContainerTest {
 	public void ejbSingletonInjectionTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
 		ejbContainer.handleAnnotations(ejbClient);
+		ejbContainer.handleAnnotations(ejbClientSingleton);
 		
-		// check if the beans were injected (the type of attributes is Proxy)
-		Assert.assertTrue(ejbClient.getStatelessEjb() instanceof Proxy);
-		//Assert.assertTrue(ejbClientSingleton.getSingletonEjb() instanceof Proxy);
-		
+		Assert.assertTrue(ejbClient.getSingletonEjb() instanceof Proxy);
+		Assert.assertTrue(ejbClientSingleton.getSingletonEjb() instanceof Proxy);
+		Assert.assertTrue(ejbClientSingleton.getSingletonEjb() == ejbClient.getSingletonEjb());	
 	}
+	*/
 	@Test
 	public void ejbPostConstructTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
@@ -60,6 +61,7 @@ public class ContainerTest {
 		// check if the ebj was postConstructed
 		Assert.assertTrue(ejbClient.getStatelessEjb().isPostConstructed());
 	}
+	/*
 	@Test
 	public void ejbPreDestroyTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
@@ -70,6 +72,7 @@ public class ContainerTest {
 		// check if the state attribute of the this ejb is setted to "Pre Destroyed"
 		Assert.assertTrue(ejbClient.getStatelessEjb().isPreDestroyed());
 	}
+	*/
 	@After
 	public void destroy(){
 		ejbClient = null;

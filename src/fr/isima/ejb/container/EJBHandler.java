@@ -4,9 +4,10 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 public class EJBHandler implements InvocationHandler {
+	private Object originalBean;
 
-	public EJBHandler(Object newInstance) {
-		// TODO Auto-generated constructor stub
+	public EJBHandler(Object bean){
+		originalBean = bean;
 	}
 
 	@Override

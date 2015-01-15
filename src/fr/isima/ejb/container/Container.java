@@ -35,13 +35,12 @@ public class Container {
 	private void fillInterfaceToClass() {
 		// Loop over all classes annotated with @Stateless 
 		// and find the corresponding interface for each class then fill our map
-		// TODO ...
-		Reflections reflection = new Reflections();
-		Set<Class<?>> classes = reflection.getTypesAnnotatedWith(Stateless.class);
+		Set<Class<?>> classes = AnnotationsHelper.getClassesAnnotatedWith(Stateless.class);
+		classes.addAll(AnnotationsHelper.getClassesAnnotatedWith(Singleton.class));
 		for(Class<?> ejbClasse : classes){
 			Class<?> interfaces[] =  ejbClasse.getInterfaces();
 			for(Class<?> ejbInterface : interfaces){
-				//exception when the interface implemented by multiple classes
+				// exception when the interface implemented by multiple classes
 				interfaceToClass.put(ejbInterface.getName(), ejbClasse);
 			}
 		}
@@ -92,15 +91,16 @@ public class Container {
 	private void invokePostConstructMethods(Object bean) {
 		Logger.log("Invoking the post construct methods");
 		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(bean.getClass(), PostConstruct.class);
-		for(Method m : methods){
-			Logger.log("trying to invoke the method '" + m.getName() + "'");
-			try {
-				m.invoke(bean, new Object[]{});
-				Logger.log("the method '" + m.getName() + "' was successfully invoked");
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-				e.printStackTrace();
-			}
-		}
+		Logger.log("Class : " + bean.getClass().getName());
+//		for(Method m : methods){
+//			Logger.log("trying to invoke the method '" + m.getName() + "'");
+//			try {
+//				m.invoke(bean, new Object[]{});
+//				Logger.log("the method '" + m.getName() + "' was successfully invoked");
+//			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 	
 	private void invokePreDestroyMethods(Object bean) {
