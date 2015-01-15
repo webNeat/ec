@@ -33,12 +33,9 @@ public class Container {
 		Reflections reflection = new Reflections();
 		Set<Class<?>> classes = reflection.getTypesAnnotatedWith(Stateless.class);
 		for(Class<?> ejbClasse : classes){
-			System.out.println("Classe : " + ejbClasse.getName());
 			Class<?> interfaces[] =  ejbClasse.getInterfaces();
 			for(Class<?> ejbInterface : interfaces){
 				//exception when the interface implemented by multiple classes
-
-				System.out.println("Interface : " + ejbInterface.getName());
 				interfaceToClass.put(ejbInterface.getName(), ejbClasse);
 			}
 		}
@@ -62,10 +59,10 @@ public class Container {
 		// get all fields having @EJB annotation
 		Set<Field> fields = AnnotationsHelper.getFieldsAnnotatedWith(client.getClass(), EJB.class );
 		for(Field field : fields){
-			Class<?> fieldInterface = field.getType();
-			if(interfaceToClass.containsKey(fieldInterface)){
+			String fieldInterfaceName = field.getType().getName();
+			if(interfaceToClass.containsKey(fieldInterfaceName)){
 				// create proxy for that ejb
-				Object bean = getProxy(interfaceToClass.get(fieldInterface));
+				Object bean = getProxy(interfaceToClass.get(fieldInterfaceName));
 				// inject the proxy
 				field.setAccessible(true);
 				try {

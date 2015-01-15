@@ -8,8 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.isima.ejb.container.Container;
+import fr.isima.ejb.container.EJBHandler;
 import fr.isima.ejb.container.EntityManagerImp;
 import fr.isima.ejb.container.tests.mocks.EjbClient;
+import fr.isima.ejb.container.tests.mocks.StatelessBeanInterface;
 
 public class ContainerTest {
 	private Container ejbContainer;
@@ -34,6 +36,7 @@ public class ContainerTest {
 		// call our container to handle this instance (handle the @EJB annotations)
 		ejbContainer.handleAnnotations(ejbClient);
 		// check if the beans were injected (the type of attributes is Proxy)
+		Assert.assertTrue(ejbClient.getStatelessEjb() != null);
 		Assert.assertTrue(ejbClient.getStatelessEjb() instanceof Proxy);
 	}
 	/*
