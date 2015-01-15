@@ -14,6 +14,7 @@ import fr.isima.ejb.container.annotations.EJB;
 import fr.isima.ejb.container.annotations.PersistenceContext;
 import fr.isima.ejb.container.annotations.PostConstruct;
 import fr.isima.ejb.container.annotations.PreDestroy;
+import fr.isima.ejb.container.annotations.Singleton;
 import fr.isima.ejb.container.annotations.Stateless;
 import fr.isima.ejb.container.logging.Logger;
 
@@ -119,6 +120,10 @@ public class Container {
 		// for @stateless
 		if(AnnotationsHelper.isAnnotatedWith(clientClass, Stateless.class)){
 			bean = Beans.getInstance().make(clientClass);
+		}
+		// for @singleton
+		if(AnnotationsHelper.isAnnotatedWith(clientClass, Singleton.class)){
+			bean = Beans.getInstance().makeSingleton(clientClass);
 		}
 		return bean;
 	}

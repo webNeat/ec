@@ -13,10 +13,13 @@ public class Beans {
 			instance = new Beans();
 		return instance;
 	}
-	
+	//Stateless
 	private Map<Class<?>, List<Object>> classToBeans;
+	//Singleton
+	private Map<Class<?>, Object> classToBeanSingleton;
 	private Beans(){
 		classToBeans = new HashMap<Class<?>, List<Object>>();
+		classToBeanSingleton = new HashMap<Class<?>, Object>();
 	}
 	public void addBeanToClass(Object o, Class<?> clientClass){
 		if(! classToBeans.containsKey(clientClass))
@@ -43,10 +46,28 @@ public class Beans {
 			try {
 				bean = Proxy.newProxyInstance(clientClass.getClassLoader(), clientClass.getInterfaces(), new EJBHandler(clientClass.newInstance()));
 			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return bean;
+	}
+	public Object makeSingleton(Class<?> classe){
+		Object proxy = getBeanSingletonOfClass(classe);
+		if(proxy == null){
+			try {
+				proxy = Proxy.newProxyInstance(classe.getClassLoader(), classe.getInterfaces(), new EJBHandler(classe.newInstance()));
+				classToBeanSingleton.put(classe, proxy);
+			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return proxy;
+	}
+	public Object getBeanSingletonOfClass(Class<?> classe){	
+		if(classToBeanSingleton.containsKey(classe)){
+			Object proxy = classToBeanSingleton.get(classe);
+			return proxy;
+		}
+		return null;
 	}
 }
