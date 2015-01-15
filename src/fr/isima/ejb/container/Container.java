@@ -50,7 +50,7 @@ public class Container {
 
 	public void handleAnnotations(Object client) {
 		try {
-	//		handleEjbAnnotation(client);	
+			handleEjbAnnotation(client);	
 			handlePersistenceAnnotation(client);	
 		} catch (Exception e) {
 			System.out.println("Erreur HandleAnnotations : " + e.getMessage());

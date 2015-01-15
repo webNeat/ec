@@ -29,7 +29,6 @@ public class ContainerTest {
 		ejbContainer.handleAnnotations(ejbClient);
 		Assert.assertTrue(ejbClient.getEntityManager() instanceof EntityManagerImp);
 	}
-	/*
 	@Test
 	public void ejbInjectionTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
@@ -37,6 +36,7 @@ public class ContainerTest {
 		// check if the beans were injected (the type of attributes is Proxy)
 		Assert.assertTrue(ejbClient.getStatelessEjb() instanceof Proxy);
 	}
+	/*
 	@Test
 	public void ejbPostConstructTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
