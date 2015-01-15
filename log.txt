@@ -1,0 +1,54 @@
+20:01:55: Container: handleAnnotations: Handling annotations
+20:01:55: Container: handleEjbAnnotation: Handling @EJB annotations
+20:01:55: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+20:01:55: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+20:01:55: StatelessBean: <init>: Constructed
+20:01:55: Container: invokePostConstructMethods: Invoking the post construct methods
+20:01:55: Container: handleAnnotations: Handling annotations
+20:01:55: Container: handleEjbAnnotation: Handling @EJB annotations
+20:01:55: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+20:01:55: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+20:01:55: StatelessBean: <init>: Constructed
+20:01:55: Container: invokePostConstructMethods: Invoking the post construct methods
+20:01:55: Container: handleAnnotations: Handling annotations
+20:01:55: Container: handleEjbAnnotation: Handling @EJB annotations
+20:01:55: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+20:01:55: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+20:01:55: StatelessBean: <init>: Constructed
+20:01:55: Container: invokePostConstructMethods: Invoking the post construct methods
+20:04:32: Container: handleAnnotations: Handling annotations
+20:04:32: Container: handleEjbAnnotation: Handling @EJB annotations
+20:04:32: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+20:04:32: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+20:04:32: StatelessBean: <init>: Constructed
+20:04:32: Container: invokePostConstructMethods: Invoking the post construct methods
+20:04:32: Container: handleAnnotations: Handling annotations
+20:04:32: Container: handleEjbAnnotation: Handling @EJB annotations
+20:04:32: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+20:04:32: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+20:04:32: StatelessBean: <init>: Constructed
+20:04:32: Container: invokePostConstructMethods: Invoking the post construct methods
+20:04:32: Container: handleAnnotations: Handling annotations
+20:04:32: Container: handleEjbAnnotation: Handling @EJB annotations
+20:04:32: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+20:04:32: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+20:04:32: StatelessBean: <init>: Constructed
+20:04:32: Container: invokePostConstructMethods: Invoking the post construct methods
+20:05:39: Container: handleAnnotations: Handling annotations
+20:05:39: Container: handleEjbAnnotation: Handling @EJB annotations
+20:05:39: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+20:05:39: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+20:05:39: StatelessBean: <init>: Constructed
+20:05:39: Container: invokePostConstructMethods: Invoking the post construct methods
+20:05:39: Container: handleAnnotations: Handling annotations
+20:05:39: Container: handleEjbAnnotation: Handling @EJB annotations
+20:05:39: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+20:05:39: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+20:05:39: StatelessBean: <init>: Constructed
+20:05:39: Container: invokePostConstructMethods: Invoking the post construct methods
+20:05:39: Container: handleAnnotations: Handling annotations
+20:05:39: Container: handleEjbAnnotation: Handling @EJB annotations
+20:05:39: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+20:05:39: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+20:05:39: StatelessBean: <init>: Constructed
+20:05:39: Container: invokePostConstructMethods: Invoking the post construct methods

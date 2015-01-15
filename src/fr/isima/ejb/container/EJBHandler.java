@@ -10,10 +10,8 @@ public class EJBHandler implements InvocationHandler {
 	}
 
 	@Override
-	public Object invoke(Object arg0, Method arg1, Object[] arg2)
-			throws Throwable {
-		// TODO Auto-generated method stub
-		return null;
+	public Object invoke(Object bean, Method method, Object[] args) throws Throwable {
+		return method.invoke(bean, args);
 	}
 
 }

@@ -2,6 +2,7 @@ package fr.isima.ejb.container.logging;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +32,15 @@ public class Logger {
 	}
 	public static String getClass(String str){
 		return str.substring(str.lastIndexOf(".")+1);
+	}
+	public static void clear(){
+		FileWriter file;
+		try {
+			file = new FileWriter(fileName, false);
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	public static void main(String[] args){
 		Logger.log("mon message");

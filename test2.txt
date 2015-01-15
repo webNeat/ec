@@ -1,3 +1,0 @@
-18:16:18: fr.isima.ejb.container.logging.Logger: main: mon message
-18:19:25: .Logger: main: mon message
-18:20:17: Logger: main: mon message

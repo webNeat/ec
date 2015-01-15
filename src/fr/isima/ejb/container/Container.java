@@ -15,6 +15,7 @@ import fr.isima.ejb.container.annotations.PersistenceContext;
 import fr.isima.ejb.container.annotations.PostConstruct;
 import fr.isima.ejb.container.annotations.PreDestroy;
 import fr.isima.ejb.container.annotations.Stateless;
+import fr.isima.ejb.container.logging.Logger;
 
 public class Container {
 	private static  Container contanier = null;
@@ -50,22 +51,25 @@ public class Container {
 	}
 
 	public void handleAnnotations(Object client) {
+		Logger.log("Handling annotations");
 		try {
 			handleEjbAnnotation(client);	
 			handlePersistenceAnnotation(client);	
 		} catch (Exception e) {
-			System.out.println("Erreur HandleAnnotations : " + e.getMessage());
-		}
-		
+			Logger.log("Error while handling annotations : " + e.getMessage());
+		}		
 	}
 
 	private void handleEjbAnnotation(Object client) {
+		Logger.log("Handling @EJB annotations");
 		// get all fields having @EJB annotation
 		Set<Field> fields = AnnotationsHelper.getFieldsAnnotatedWith(client.getClass(), EJB.class );
 		for(Field field : fields){
 			String fieldInterfaceName = field.getType().getName();
+			Logger.log("Found an EJB with the interface " + fieldInterfaceName);
 			if(interfaceToClass.containsKey(fieldInterfaceName)){
 				Class<?> beanClass = interfaceToClass.get(fieldInterfaceName);
+				Logger.log("The corresponding class is " + beanClass.getName());
 				// create proxy for that ejb
 				Object bean = getProxy(beanClass);
 				// Execute @PostConstruct methods
@@ -85,10 +89,13 @@ public class Container {
 	}
 
 	private void invokePostConstructMethods(Object bean) {
+		Logger.log("Invoking the post construct methods");
 		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(bean.getClass(), PostConstruct.class);
 		for(Method m : methods){
+			Logger.log("trying to invoke the method '" + m.getName() + "'");
 			try {
 				m.invoke(bean, new Object[]{});
+				Logger.log("the method '" + m.getName() + "' was successfully invoked");
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
 			}
