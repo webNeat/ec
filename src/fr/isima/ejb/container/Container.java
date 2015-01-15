@@ -1,6 +1,8 @@
 package fr.isima.ejb.container;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +12,7 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 
 import fr.isima.ejb.container.annotations.EJB;
 import fr.isima.ejb.container.annotations.PersistenceContext;
+import fr.isima.ejb.container.annotations.PostConstruct;
 import fr.isima.ejb.container.annotations.Stateless;
 
 public class Container {
@@ -61,8 +64,11 @@ public class Container {
 		for(Field field : fields){
 			String fieldInterfaceName = field.getType().getName();
 			if(interfaceToClass.containsKey(fieldInterfaceName)){
+				Class<?> beanClass = interfaceToClass.get(fieldInterfaceName);
 				// create proxy for that ejb
-				Object bean = getProxy(interfaceToClass.get(fieldInterfaceName));
+				Object bean = getProxy(beanClass);
+				// Execute @PostConstruct methods
+				handlePostConstruct(bean, beanClass);
 				// inject the proxy
 				field.setAccessible(true);
 				try {
@@ -73,6 +79,17 @@ public class Container {
 				}
 			} else {
 				// Throw some Exception ejb interafce not found 
+			}
+		}
+	}
+
+	private void handlePostConstruct(Object bean, Class<?> beanClass) {
+		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(beanClass, PostConstruct.class);
+		for(Method m : methods){
+			try {
+				m.invoke(bean, new Object[]{});
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
 			}
 		}
 	}
