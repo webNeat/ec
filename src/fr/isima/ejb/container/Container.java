@@ -13,6 +13,7 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 import fr.isima.ejb.container.annotations.EJB;
 import fr.isima.ejb.container.annotations.PersistenceContext;
 import fr.isima.ejb.container.annotations.PostConstruct;
+import fr.isima.ejb.container.annotations.PreDestroy;
 import fr.isima.ejb.container.annotations.Stateless;
 
 public class Container {
@@ -68,7 +69,7 @@ public class Container {
 				// create proxy for that ejb
 				Object bean = getProxy(beanClass);
 				// Execute @PostConstruct methods
-				handlePostConstruct(bean, beanClass);
+				invokePostConstructMethods(bean);
 				// inject the proxy
 				field.setAccessible(true);
 				try {
@@ -83,8 +84,19 @@ public class Container {
 		}
 	}
 
-	private void handlePostConstruct(Object bean, Class<?> beanClass) {
-		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(beanClass, PostConstruct.class);
+	private void invokePostConstructMethods(Object bean) {
+		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(bean.getClass(), PostConstruct.class);
+		for(Method m : methods){
+			try {
+				m.invoke(bean, new Object[]{});
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void invokePreDestroyMethods(Object bean) {
+		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(bean.getClass(), PreDestroy.class);
 		for(Method m : methods){
 			try {
 				m.invoke(bean, new Object[]{});
@@ -103,6 +115,11 @@ public class Container {
 		}
 		return bean;
 	}
+	
+	public void removeBean(Object bean){
+		invokePreDestroyMethods(bean);
+	}
+	
 	private void handlePersistenceAnnotation(Object client){
 		// get all fields having @PersistenceContext annotation
 		Reflections reflection = new Reflections(client.getClass().getName(), new FieldAnnotationsScanner()) ;

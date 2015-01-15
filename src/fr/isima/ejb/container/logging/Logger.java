@@ -5,15 +5,12 @@ import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-public class Logger implements LoggerInterface {
-	private String fileName;
-	public Logger(String fileURL) {
-		setOutputFile(fileURL);
-	}
-	public void setOutputFile(String fileURL) {
+public class Logger {
+	private static String fileName = "log.txt";
+	public static void setOutputFile(String fileURL) {
 			fileName = fileURL;		
 	}
-	public void log(String msg) {
+	public static void log(String msg) {
 		try {
 			FileWriter file = new FileWriter(fileName, true);
 			BufferedWriter buffer = new BufferedWriter(file);
@@ -27,17 +24,15 @@ public class Logger implements LoggerInterface {
 			System.out.println("Erreur Opening File : " + e.getMessage());
 		}
 	}
-	public String getTime(){
+	public static String getTime(){
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
 		return dateFormat.format(date).split(" ")[1];
 	}
-	public String getClass(String str){
+	public static String getClass(String str){
 		return str.substring(str.lastIndexOf(".")+1);
 	}
 	public static void main(String[] args){
-		Logger logger = new Logger("test2.txt");
-		logger.log("mon message");
+		Logger.log("mon message");
 	}
-	
 }

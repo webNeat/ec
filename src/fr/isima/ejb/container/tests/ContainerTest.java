@@ -39,18 +39,23 @@ public class ContainerTest {
 		Assert.assertTrue(ejbClient.getStatelessEjb() != null);
 		Assert.assertTrue(ejbClient.getStatelessEjb() instanceof Proxy);
 	}
-	/*
 	@Test
 	public void ejbPostConstructTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
-		// check if the state attribute of the ebjs with @PostContruct is setted to "Post Contructed"
+		ejbContainer.handleAnnotations(ejbClient);
+		// check if the ebj was postConstructed
+		Assert.assertTrue(ejbClient.getStatelessEjb().isPostConstructed());
 	}
 	@Test
 	public void ejbPreDestroyTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
-		// tell the container to delete an ejb
+		ejbContainer.handleAnnotations(ejbClient);
+		// tell the container to delete the ejb
+		StatelessBeanInterface bean = ejbClient.getStatelessEjb();
+		ejbContainer.removeBean(bean);
 		// check if the state attribute of the this ejb is setted to "Pre Destroyed"
-	}*/
+		Assert.assertTrue(ejbClient.getStatelessEjb().isPreDestroyed());
+	}
 	@After
 	public void destroy(){
 		ejbClient = null;
