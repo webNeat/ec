@@ -2,6 +2,7 @@ package fr.isima.ejb.container;
 
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,11 +41,19 @@ public class Beans {
 		}
 		return null;
 	}
+	private Class<?>[] getProxyInterfacesOf(Class<?> beanClass){
+		Class<?>[] ints = beanClass.getInterfaces();
+		Class<?>[] res = new Class<?>[ints.length + 1];
+		for(int i = 0; i < ints.length; i++)
+			res[i] = ints[i];
+		res[ints.length] = ProxyInterface.class;
+		return res;
+	}
 	public Object make(Class<?> clientClass){
 		Object bean = getBeanOfClass(clientClass);
 		if(bean == null){
 			try {
-				bean = Proxy.newProxyInstance(clientClass.getClassLoader(), clientClass.getInterfaces(), new EJBHandler(clientClass.newInstance()));
+				bean = Proxy.newProxyInstance(clientClass.getClassLoader(), getProxyInterfacesOf(clientClass), new EJBHandler(clientClass.newInstance()));
 			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
@@ -55,7 +64,7 @@ public class Beans {
 		Object proxy = getBeanSingletonOfClass(classe);
 		if(proxy == null){
 			try {
-				proxy = Proxy.newProxyInstance(classe.getClassLoader(), classe.getInterfaces(), new EJBHandler(classe.newInstance()));
+				proxy = Proxy.newProxyInstance(classe.getClassLoader(), getProxyInterfacesOf(classe), new EJBHandler(classe.newInstance()));
 				classToBeanSingleton.put(classe, proxy);
 			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();

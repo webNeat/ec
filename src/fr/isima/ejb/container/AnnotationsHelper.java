@@ -9,8 +9,6 @@ import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 
-import fr.isima.ejb.container.annotations.Stateless;
-
 public class AnnotationsHelper {
 	public static Set<Class<?>> getClassesAnnotatedWith(Class<? extends Annotation> annotationClass){
 		Reflections refs = new Reflections();

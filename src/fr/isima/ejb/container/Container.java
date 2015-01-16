@@ -46,13 +46,10 @@ public class Container {
 				int taille = interfaces.length;
 				int cp = 0;
 				for(Class<?> ejbInterface : interfaces){
-					Logger.log("Interface : " + ejbInterface.getSimpleName() + " class : " + ejbClasse.getSimpleName());
 					if(AnnotationsHelper.isAnnotatedWith(ejbInterface, Local.class)){
 						interfaceToClass.put(ejbInterface.getName(), ejbClasse);
-						Logger.log("local");
 						break;
-					}
-					else
+					} else
 						cp++;
 				}
 				if(taille == cp){
@@ -73,9 +70,10 @@ public class Container {
 		Logger.log("Handling annotations");
 		try {
 			handleEjbAnnotation(client);	
-			handlePersistenceAnnotation(client);	
+			handlePersistenceAnnotation(client);
 		} catch (Exception e) {
 			Logger.log("Error while handling annotations : " + e.getMessage());
+			e.printStackTrace();
 		}		
 	}
 
@@ -109,25 +107,29 @@ public class Container {
 
 	private void invokePostConstructMethods(Object bean) {
 		Logger.log("Invoking the post construct methods");
-		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(bean.getClass(), PostConstruct.class);
-		Logger.log("Class : " + bean.getClass().getName());
-//		for(Method m : methods){
-//			Logger.log("trying to invoke the method '" + m.getName() + "'");
-//			try {
-//				m.invoke(bean, new Object[]{});
-//				Logger.log("the method '" + m.getName() + "' was successfully invoked");
-//			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-//				e.printStackTrace();
-//			}
-//		}
+		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(((ProxyInterface) bean).getOriginalClass(), PostConstruct.class);
+		for(Method m : methods){
+			Logger.log("trying to invoke the method '" + m.getName() + "'");
+			try {
+				Method proxyMethod = bean.getClass().getMethod(m.getName(), m.getParameterTypes());
+				proxyMethod.invoke(bean, new Object[]{});
+				Logger.log("the method '" + m.getName() + "' was successfully invoked");
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	private void invokePreDestroyMethods(Object bean) {
-		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(bean.getClass(), PreDestroy.class);
+		Logger.log("Invoking the pre destroy methods");
+		Set<Method> methods = AnnotationsHelper.getMethodsAnnotatedWith(((ProxyInterface) bean).getOriginalClass(), PreDestroy.class);
 		for(Method m : methods){
+			Logger.log("trying to invoke the method '" + m.getName() + "'");
 			try {
-				m.invoke(bean, new Object[]{});
-			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+				Method proxyMethod = bean.getClass().getMethod(m.getName(), m.getParameterTypes());
+				proxyMethod.invoke(bean, new Object[]{});
+				Logger.log("the method '" + m.getName() + "' was successfully invoked");
+			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 				e.printStackTrace();
 			}
 		}
@@ -149,6 +151,7 @@ public class Container {
 	
 	public void removeBean(Object bean){
 		invokePreDestroyMethods(bean);
+		Beans.getInstance().addBeanToClass(bean, ((ProxyInterface) bean).getOriginalClass());
 	}
 	
 	private void handlePersistenceAnnotation(Object client){

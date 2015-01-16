@@ -61,8 +61,16 @@ public class ContainerTest {
 		Assert.assertTrue(ejbClientSingleton.getSingletonEjb() instanceof Proxy);
 		Assert.assertTrue(ejbClientSingleton.getSingletonEjb() == ejbClient.getSingletonEjb());	
 	}
+	@Test
+	public void ejbStatelessDestroyTest(){
+		ejbContainer.handleAnnotations(ejbClient);
+		Object instance1 = ejbClient.getStatelessEjb();
+		ejbContainer.removeBean(instance1);
+		ejbClient = new EjbClient();
+		ejbContainer.handleAnnotations(ejbClient);
+		Assert.assertEquals(instance1, ejbClient.getStatelessEjb());
+	}
 
-	/*
 	@Test
 	public void ejbPostConstructTest(){
 		// call our container to handle this instance (handle the @EJB annotations)
@@ -80,7 +88,7 @@ public class ContainerTest {
 		// check if the state attribute of the this ejb is setted to "Pre Destroyed"
 		Assert.assertTrue(ejbClient.getStatelessEjb().isPreDestroyed());
 	}
-	*/
+	
 	@After
 	public void destroy(){
 		ejbClient = null;
