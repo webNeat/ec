@@ -19,6 +19,7 @@ import fr.isima.ejb.container.annotations.Singleton;
 import fr.isima.ejb.container.annotations.Stateless;
 import fr.isima.ejb.container.exceptions.LocalAllInterfacesUnfoundException;
 import fr.isima.ejb.container.exceptions.NoLocalInterfaceIsImplemented;
+import fr.isima.ejb.container.exceptions.UknwonEjbAnnotation;
 import fr.isima.ejb.container.logging.Logger;
 
 public class Container {
@@ -88,7 +89,12 @@ public class Container {
 				Class<?> beanClass = interfaceToClass.get(fieldInterfaceName);
 				Logger.log("The corresponding class is " + beanClass.getName());
 				// create proxy for that ejb
-				Object bean = getProxy(beanClass);
+				Object bean = null;
+				try {
+					  bean = getProxy(beanClass);	
+				} catch (UknwonEjbAnnotation e) {
+					Logger.log(e.getMessage());
+				}
 				// Execute @PostConstruct methods
 				invokePostConstructMethods(bean);
 				// inject the proxy
@@ -135,16 +141,16 @@ public class Container {
 		}
 	}
 
-	private Object getProxy(Class<?> clientClass) {
+	private Object getProxy(Class<?> clientClass) throws UknwonEjbAnnotation {
 		Object bean = null;
 		// check the annotation of the ejb class
 		// for @stateless
 		if(AnnotationsHelper.isAnnotatedWith(clientClass, Stateless.class)){
 			bean = Beans.getInstance().make(clientClass);
-		}
-		// for @singleton
-		if(AnnotationsHelper.isAnnotatedWith(clientClass, Singleton.class)){
+		}else if(AnnotationsHelper.isAnnotatedWith(clientClass, Singleton.class)){
 			bean = Beans.getInstance().makeSingleton(clientClass);
+		}else{
+			throw new UknwonEjbAnnotation(clientClass);
 		}
 		return bean;
 	}
