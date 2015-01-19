@@ -96,11 +96,10 @@ public class Container {
 				try {
 					field.set(client, bean);
 				} catch (IllegalArgumentException | IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new EjbInjectionException(e);
 				}
 			} else {
-				// Throw some Exception ejb interafce not found 
+				throw new EjbClassNotFoundException(field.getType());
 			}
 		}
 	}
@@ -115,7 +114,7 @@ public class Container {
 				proxyMethod.invoke(bean, new Object[]{});
 				Logger.log("the method '" + m.getName() + "' was successfully invoked");
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-				e.printStackTrace();
+				throw new PostConstructInvokationException(m, e);
 			}
 		}
 	}
@@ -130,7 +129,7 @@ public class Container {
 				proxyMethod.invoke(bean, new Object[]{});
 				Logger.log("the method '" + m.getName() + "' was successfully invoked");
 			} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-				e.printStackTrace();
+				throw new PreDestroyInvokationException(m, e);			
 			}
 		}
 	}
@@ -161,10 +160,10 @@ public class Container {
 		for(Field field : fields){
 			if(field.getType().getSimpleName().equals("EntityManager")) {
 				try{
-				field.setAccessible(true);
-				field.set(client, EntityManagerImp.getEntityManager());
-				}catch(Exception e){
-					System.out.println("Erreur Injection Entity Manager : " + e.getMessage());
+					field.setAccessible(true);
+					field.set(client, EntityManagerImp.getEntityManager());
+				} catch(Exception e) {
+					throw new EjbInjectionException(e);
 					
 				}
 			}

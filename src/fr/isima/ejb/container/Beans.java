@@ -60,7 +60,7 @@ public class Beans {
 				Container.getContanier().handleAnnotations(bean);
 				bean = Proxy.newProxyInstance(clientClass.getClassLoader(), getProxyInterfacesOf(clientClass), new EJBHandler(bean));
 			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | LocalAllInterfacesUnfoundException | NoLocalInterfaceIsImplemented e) {
-				e.printStackTrace();
+				throw new ProxyMakingException(e);
 			}
 		}
 		return bean;
@@ -74,7 +74,7 @@ public class Beans {
 				proxy = Proxy.newProxyInstance(classe.getClassLoader(), getProxyInterfacesOf(classe), new EJBHandler(bean));
 				classToBeanSingleton.put(classe, proxy);
 			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | LocalAllInterfacesUnfoundException | NoLocalInterfaceIsImplemented e) {
-				e.printStackTrace();
+				throw new ProxyMakingException(e);
 			}
 		}
 		return proxy;
