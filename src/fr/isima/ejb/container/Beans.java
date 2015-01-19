@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fr.isima.ejb.container.exceptions.LocalAllInterfacesUnfoundException;
+import fr.isima.ejb.container.exceptions.NoLocalInterfaceIsImplemented;
+
 public class Beans {
 	private static Beans instance = null;
 	public static Beans getInstance() {
@@ -53,8 +56,10 @@ public class Beans {
 		Object bean = getBeanOfClass(clientClass);
 		if(bean == null){
 			try {
-				bean = Proxy.newProxyInstance(clientClass.getClassLoader(), getProxyInterfacesOf(clientClass), new EJBHandler(clientClass.newInstance()));
-			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException e) {
+				bean = clientClass.newInstance();
+				Container.getContanier().handleAnnotations(bean);
+				bean = Proxy.newProxyInstance(clientClass.getClassLoader(), getProxyInterfacesOf(clientClass), new EJBHandler(bean));
+			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | LocalAllInterfacesUnfoundException | NoLocalInterfaceIsImplemented e) {
 				e.printStackTrace();
 			}
 		}
@@ -64,9 +69,11 @@ public class Beans {
 		Object proxy = getBeanSingletonOfClass(classe);
 		if(proxy == null){
 			try {
-				proxy = Proxy.newProxyInstance(classe.getClassLoader(), getProxyInterfacesOf(classe), new EJBHandler(classe.newInstance()));
+				Object bean = classe.newInstance();
+				Container.getContanier().handleAnnotations(bean);
+				proxy = Proxy.newProxyInstance(classe.getClassLoader(), getProxyInterfacesOf(classe), new EJBHandler(bean));
 				classToBeanSingleton.put(classe, proxy);
-			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException e) {
+			} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | LocalAllInterfacesUnfoundException | NoLocalInterfaceIsImplemented e) {
 				e.printStackTrace();
 			}
 		}

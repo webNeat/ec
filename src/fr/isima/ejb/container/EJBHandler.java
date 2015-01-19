@@ -29,7 +29,10 @@ public class EJBHandler implements InvocationHandler {
 			result = bean;			
 		} else if(method.getName().equals("equals")){
 			Logger.log("equals called");
-			result = ( bean == ((ProxyInterface)args[0]).getBean() );	
+			result = ( bean == ((ProxyInterface)args[0]).getBean() );
+		} else if(method.getName().equals("toString")){
+			Logger.log("toString called");
+			result = bean.toString();
 		} else {
 			Logger.log(method.getName() + " is called with params : " + args);
 			try {
