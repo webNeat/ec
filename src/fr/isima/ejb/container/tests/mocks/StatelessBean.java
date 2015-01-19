@@ -14,7 +14,7 @@ public class StatelessBean implements StatelessBeanInterface {
 	private boolean preDestroyed;
 	
 	public StatelessBean() {
-		Logger.log("Constructed");
+		Logger.log("Constructed StateLessBean");
 		postConstructed = false;
 		preDestroyed = false;
 	}

@@ -1,5 +1,7 @@
 package fr.isima.ejb.container;
 
+import fr.isima.ejb.container.logging.Logger;
+
 public class EntityManagerImp implements EntityManager{
 	private static EntityManagerImp entityManager;
 	
@@ -11,61 +13,12 @@ public class EntityManagerImp implements EntityManager{
 	}
 	@Override
 	public void persist(Object entity) {
-		System.out.println("Persisit an Entity");
+		Logger.log("Persisit an Entity");
 	}
 
 	@Override
 	public void remove(Object entity) {
-
-		System.out.println("Remove an Entity");
-	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean contains(Object entity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void flush() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public <T> void merge(T entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void close() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void detach() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isOpen() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void joinTransaction() {
-		// TODO Auto-generated method stub
-		
+		Logger.log("Remove an Entity");
 	}
 
 }

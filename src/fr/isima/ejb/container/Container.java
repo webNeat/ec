@@ -37,7 +37,7 @@ public class Container {
 	}
 
 	private void fillInterfaceToClass() throws LocalAllInterfacesUnfoundException, NoLocalInterfaceIsImplemented {
-		// Loop over all classes annotated with @Stateless 
+		// Loop over all classes annotated with @Stateless and @Statefull
 		// and find the corresponding interface for each class then fill our map
 		Set<Class<?>> classes = AnnotationsHelper.getClassesAnnotatedWith(Stateless.class);
 		classes.addAll(AnnotationsHelper.getClassesAnnotatedWith(Singleton.class));
@@ -144,7 +144,7 @@ public class Container {
 	private Object getProxy(Class<?> clientClass) throws UknwonEjbAnnotation {
 		Object bean = null;
 		// check the annotation of the ejb class
-		// for @stateless
+		// for @stateless and Singleton
 		if(AnnotationsHelper.isAnnotatedWith(clientClass, Stateless.class)){
 			bean = Beans.getInstance().make(clientClass);
 		}else if(AnnotationsHelper.isAnnotatedWith(clientClass, Singleton.class)){
@@ -162,16 +162,17 @@ public class Container {
 	
 	private void handlePersistenceAnnotation(Object client){
 		// get all fields having @PersistenceContext annotation
-		Reflections reflection = new Reflections(client.getClass().getName(), new FieldAnnotationsScanner()) ;
-		Set<Field> fields = reflection.getFieldsAnnotatedWith(PersistenceContext.class );
+		Logger.log("Handling @PersistenceContext annotations");		
+		Set<Field> fields = AnnotationsHelper.getFieldsAnnotatedWith(client.getClass(), PersistenceContext.class);
 		for(Field field : fields){
 			if(field.getType().getSimpleName().equals("EntityManager")) {
 				try{
-				field.setAccessible(true);
-				field.set(client, EntityManagerImp.getEntityManager());
-				}catch(Exception e){
-					System.out.println("Erreur Injection Entity Manager : " + e.getMessage());
+					field.setAccessible(true);
+					field.set(client, EntityManagerImp.getEntityManager());
+					Logger.log("Injection Entity Manager");
 					
+				}catch(Exception e){
+					Logger.log("Erreur Injection Entity Manager ");
 				}
 			}
 		}
