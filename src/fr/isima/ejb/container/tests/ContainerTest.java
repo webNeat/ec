@@ -89,6 +89,12 @@ public class ContainerTest {
 		Assert.assertTrue(ejbClient.getStatelessEjb().isPreDestroyed());
 	}
 	
+	@Test
+	public void innerEjbInjectionTest(){
+		ejbContainer.handleAnnotations(ejbClient);
+		Assert.assertTrue(ejbClient.getSingletonEjb().getInnerBean() instanceof Proxy);
+	}
+	
 	@After
 	public void destroy(){
 		ejbClient = null;
