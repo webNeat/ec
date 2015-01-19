@@ -36,7 +36,7 @@ public class Container {
 	}
 
 	private void fillInterfaceToClass() throws LocalAllInterfacesUnfoundException, NoLocalInterfaceIsImplemented {
-		// Loop over all classes annotated with @Stateless 
+		// Loop over all classes annotated with @Stateless and @Statefull
 		// and find the corresponding interface for each class then fill our map
 		Set<Class<?>> classes = AnnotationsHelper.getClassesAnnotatedWith(Stateless.class);
 		classes.addAll(AnnotationsHelper.getClassesAnnotatedWith(Singleton.class));
@@ -88,7 +88,12 @@ public class Container {
 				Class<?> beanClass = interfaceToClass.get(fieldInterfaceName);
 				Logger.log("The corresponding class is " + beanClass.getName());
 				// create proxy for that ejb
-				Object bean = getProxy(beanClass);
+				Object bean = null;
+				try {
+					  bean = getProxy(beanClass);	
+				} catch (UknwonEjbAnnotation e) {
+					Logger.log(e.getMessage());
+				}
 				// Execute @PostConstruct methods
 				invokePostConstructMethods(bean);
 				// inject the proxy
@@ -134,16 +139,16 @@ public class Container {
 		}
 	}
 
-	private Object getProxy(Class<?> clientClass) {
+	private Object getProxy(Class<?> clientClass) throws UknwonEjbAnnotation {
 		Object bean = null;
 		// check the annotation of the ejb class
-		// for @stateless
+		// for @stateless and Singleton
 		if(AnnotationsHelper.isAnnotatedWith(clientClass, Stateless.class)){
 			bean = Beans.getInstance().make(clientClass);
-		}
-		// for @singleton
-		if(AnnotationsHelper.isAnnotatedWith(clientClass, Singleton.class)){
+		}else if(AnnotationsHelper.isAnnotatedWith(clientClass, Singleton.class)){
 			bean = Beans.getInstance().makeSingleton(clientClass);
+		}else{
+			throw new UknwonEjbAnnotation(clientClass);
 		}
 		return bean;
 	}
@@ -155,8 +160,8 @@ public class Container {
 	
 	private void handlePersistenceAnnotation(Object client){
 		// get all fields having @PersistenceContext annotation
-		Reflections reflection = new Reflections(client.getClass().getName(), new FieldAnnotationsScanner()) ;
-		Set<Field> fields = reflection.getFieldsAnnotatedWith(PersistenceContext.class );
+		Logger.log("Handling @PersistenceContext annotations");		
+		Set<Field> fields = AnnotationsHelper.getFieldsAnnotatedWith(client.getClass(), PersistenceContext.class);
 		for(Field field : fields){
 			if(field.getType().getSimpleName().equals("EntityManager")) {
 				try{
@@ -164,8 +169,7 @@ public class Container {
 					field.set(client, EntityManagerImp.getEntityManager());
 				} catch(Exception e) {
 					throw new EjbInjectionException(e);
-					
-				}
+					Logger.log("Injection Entity Manager");
 			}
 		}
 	}
