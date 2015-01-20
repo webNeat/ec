@@ -12,6 +12,7 @@ import fr.isima.ejb.container.Container;
 import fr.isima.ejb.container.EntityManagerImp;
 import fr.isima.ejb.container.exceptions.LocalAllInterfacesUnfoundException;
 import fr.isima.ejb.container.exceptions.NoLocalInterfaceIsImplemented;
+import fr.isima.ejb.container.exceptions.PreDestroyInvokationException;
 import fr.isima.ejb.container.logging.Logger;
 import fr.isima.ejb.container.tests.mocks.EjbClient;
 import fr.isima.ejb.container.tests.mocks.EjblClientSingleton;
@@ -62,7 +63,7 @@ public class ContainerTest {
 		Assert.assertTrue(ejbClientSingleton.getSingletonEjb() == ejbClient.getSingletonEjb());	
 	}
 	@Test
-	public void ejbStatelessDestroyTest(){
+	public void ejbStatelessDestroyTest() throws PreDestroyInvokationException{
 		ejbContainer.handleAnnotations(ejbClient);
 		Object instance1 = ejbClient.getStatelessEjb();
 		ejbContainer.removeBean(instance1);
@@ -79,7 +80,7 @@ public class ContainerTest {
 		Assert.assertTrue(ejbClient.getStatelessEjb().isPostConstructed());
 	}
 	@Test
-	public void ejbPreDestroyTest(){
+	public void ejbPreDestroyTest() throws PreDestroyInvokationException{
 		// call our container to handle this instance (handle the @EJB annotations)
 		ejbContainer.handleAnnotations(ejbClient);
 		// tell the container to delete the ejb

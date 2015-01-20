@@ -9,6 +9,7 @@ import java.util.Map;
 
 import fr.isima.ejb.container.exceptions.LocalAllInterfacesUnfoundException;
 import fr.isima.ejb.container.exceptions.NoLocalInterfaceIsImplemented;
+import fr.isima.ejb.container.exceptions.ProxyMakingException;
 
 public class Beans {
 	private static Beans instance = null;
@@ -52,7 +53,7 @@ public class Beans {
 		res[ints.length] = ProxyInterface.class;
 		return res;
 	}
-	public Object make(Class<?> clientClass){
+	public Object make(Class<?> clientClass) throws ProxyMakingException{
 		Object bean = getBeanOfClass(clientClass);
 		if(bean == null){
 			try {
@@ -65,7 +66,7 @@ public class Beans {
 		}
 		return bean;
 	}
-	public Object makeSingleton(Class<?> classe){
+	public Object makeSingleton(Class<?> classe) throws ProxyMakingException{
 		Object proxy = getBeanSingletonOfClass(classe);
 		if(proxy == null){
 			try {
