@@ -5,13 +5,13 @@ import java.lang.reflect.Proxy;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.isima.ejb.container.Container;
 import fr.isima.ejb.container.EntityManagerImpl;
 import fr.isima.ejb.container.exceptions.LocalAllInterfacesUnfoundException;
 import fr.isima.ejb.container.exceptions.NoLocalInterfaceIsImplemented;
+import fr.isima.ejb.container.exceptions.PreDestroyInvokationException;
 import fr.isima.ejb.container.exceptions.SingletonBeanMakingExecption;
 import fr.isima.ejb.container.logging.Logger;
 import fr.isima.ejb.container.tests.mocks.EjbClient;
@@ -60,7 +60,7 @@ public class ContainerTest {
 		
 		Assert.assertTrue(ejbClient.getSingletonEjb() instanceof Proxy);
 		Assert.assertTrue(ejbClientSingleton.getSingletonEjb() instanceof Proxy);
-		Assert.assertTrue(ejbClientSingleton.getSingletonEjb().equals(ejbClient.getSingletonEjb()));	
+		Assert.assertTrue(ejbClientSingleton.getSingletonEjb().equals(ejbClient.getSingletonEjb()));
 	}
 	@Test
 	public void ejbPostConstructTest(){
@@ -70,16 +70,14 @@ public class ContainerTest {
 		Assert.assertTrue(ejbClient.getStatelessEjb().isPostConstructed());
 	}
 	@Test
-	public void ejbPreDestroyTest(){
+	public void ejbPreDestroyTest() throws PreDestroyInvokationException{
 		// call our container to handle this instance (handle the @EJB annotations)
 		ejbContainer.handleAnnotations(ejbClient);
 		// tell the container to delete the ejb
 		StatelessBeanInterface bean = ejbClient.getStatelessEjb();
-		// ejbContainer.removeBean(bean);
 		// check if the state attribute of the this ejb is setted to "Pre Destroyed"
 		Assert.assertTrue(ejbClient.getStatelessEjb().isPreDestroyed());
-	}
-	
+	}	
 	@Test
 	public void innerEjbInjectionTest(){
 		ejbContainer.handleAnnotations(ejbClient);

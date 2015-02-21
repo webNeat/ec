@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.reflections.Reflections;
-import org.reflections.scanners.FieldAnnotationsScanner;
-
 import fr.isima.ejb.container.annotations.EJB;
 import fr.isima.ejb.container.annotations.Local;
 import fr.isima.ejb.container.annotations.PersistenceContext;
@@ -29,13 +26,15 @@ import fr.isima.ejb.container.exceptions.SingletonBeanMakingExecption;
 import fr.isima.ejb.container.logging.Logger;
 
 public class Container {
-	private static  Container contanier = null;
-	public static Container getInstance() throws LocalAllInterfacesUnfoundException, NoLocalInterfaceIsImplemented, SingletonBeanMakingExecption {
-		if(contanier == null)
+	private static Container contanier = null;
+
+	public static Container getInstance() throws LocalAllInterfacesUnfoundException,
+			NoLocalInterfaceIsImplemented, SingletonBeanMakingExecption {
+		if (contanier == null)
 			contanier = new Container();
 		return contanier;
 	}
-	
+
 	private Map<String, Class<?>> interfaceToClass;
 	private BeanManager beanManager;
 	private Container() throws LocalAllInterfacesUnfoundException, NoLocalInterfaceIsImplemented, SingletonBeanMakingExecption {
@@ -76,7 +75,6 @@ public class Container {
 			}
 		}
 	}
-	
 	public Map<String, Class<?>> getInterfaceToClass() {
 		return interfaceToClass;
 	}
@@ -84,7 +82,7 @@ public class Container {
 	public void handleAnnotations(Object client) {
 		Logger.log("Handling annotations");
 		try {
-			handleEjbAnnotation(client);	
+			handleEjbAnnotation(client);
 			handlePersistenceAnnotation(client);
 		} catch (Exception e) {
 			Logger.log("Error while handling annotations : " + e.getMessage());
@@ -95,11 +93,12 @@ public class Container {
 	private void handleEjbAnnotation(Object client) throws EjbInjectionException, EjbClassNotFoundException {
 		Logger.log("Handling @EJB annotations");
 		// get all fields having @EJB annotation
-		Set<Field> fields = AnnotationsHelper.getFieldsAnnotatedWith(client.getClass(), EJB.class );
-		for(Field field : fields){
+		Set<Field> fields = AnnotationsHelper.getFieldsAnnotatedWith(
+				client.getClass(), EJB.class);
+		for (Field field : fields) {
 			String fieldInterfaceName = field.getType().getName();
 			Logger.log("Found an EJB with the interface " + fieldInterfaceName);
-			if(interfaceToClass.containsKey(fieldInterfaceName)){
+			if (interfaceToClass.containsKey(fieldInterfaceName)) {
 				Class<?> beanClass = interfaceToClass.get(fieldInterfaceName);
 				Logger.log("The corresponding class is " + beanClass.getName());
 				// create proxy for that ejb
@@ -169,25 +168,4 @@ public class Container {
 			}
 		}
 	}
-/*
-	private Object getProxy(Class<?> clientClass) throws UknwonEjbAnnotation {
-		Object bean = null;
-		// check the annotation of the ejb class
-		// for @stateless and Singleton
-		if(AnnotationsHelper.isAnnotatedWith(clientClass, Stateless.class)){
-			bean = Beans.getInstance().make(clientClass);
-		}else if(AnnotationsHelper.isAnnotatedWith(clientClass, Singleton.class)){
-			bean = Beans.getInstance().makeSingleton(clientClass);
-		}else{
-			throw new UknwonEjbAnnotation(clientClass);
-		}
-		return bean;
-	}
-	
-	public void removeBean(Object bean){
-		invokePreDestroyMethods(bean);
-		Beans.getInstance().addBeanToClass(bean, ((ProxyInterface) bean).getOriginalClass());
-	}
-*/
 }
-  
