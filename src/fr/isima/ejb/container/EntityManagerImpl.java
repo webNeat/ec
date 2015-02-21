@@ -2,13 +2,13 @@ package fr.isima.ejb.container;
 
 import fr.isima.ejb.container.logging.Logger;
 
-public class EntityManagerImp implements EntityManager{
-	private static EntityManagerImp entityManager;
+public class EntityManagerImpl implements EntityManager{
+	private static EntityManagerImpl entityManager;
 	
-	private EntityManagerImp() {}
-	public static EntityManagerImp getEntityManager() {
+	private EntityManagerImpl() {}
+	public static EntityManagerImpl getEntityManager() {
 		if(entityManager == null)
-			entityManager =  new EntityManagerImp();	
+			entityManager =  new EntityManagerImpl();	
 		return entityManager;
 	}
 	@Override

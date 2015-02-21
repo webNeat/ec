@@ -668,3 +668,192 @@
 23:32:41: EJBHandler: invoke: doRequiredTransaction is called with params : null
 23:32:41: StatelessBean: doRequiredTransaction: Doing a transaction
 23:32:41: EJBHandler: invoke: result is : null
+19:14:02: Container: handleAnnotations: Handling annotations
+19:14:02: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:02: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:14:02: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:14:02: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:14:02: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:14:02: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:26: Container: handleAnnotations: Handling annotations
+19:14:26: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:26: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:14:26: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:14:26: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:14:26: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:14:26: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:26: Container: handleAnnotations: Handling annotations
+19:14:26: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:26: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:14:26: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:14:26: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:14:26: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:14:26: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:26: Container: handleAnnotations: Handling annotations
+19:14:26: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:27: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:14:27: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:14:27: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:14:27: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:14:27: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:27: Container: handleAnnotations: Handling annotations
+19:14:27: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:27: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:14:27: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:14:27: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:27: Container: handleAnnotations: Handling annotations
+19:14:27: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:27: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:14:27: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:14:27: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:14:27: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:14:27: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:27: Container: handleAnnotations: Handling annotations
+19:14:27: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:27: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:14:27: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:14:27: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:27: Container: invokePostConstructMethodsOf: Invoking the post construct methods
+19:14:27: EJBHandler: invoke: getInnerBean is called with params : null
+19:14:27: StatelessBean: <init>: Constructed StateLessBean
+19:14:27: Container: handleAnnotations: Handling annotations
+19:14:27: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:27: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:27: Container: invokePostConstructMethodsOf: Invoking the post construct methods
+19:14:27: Container: invokePostConstructMethodsOf: trying to invoke the method 'postConstructMethod'
+19:14:27: StatelessBean: postConstructMethod: Post Constructed !
+19:14:27: Container: invokePostConstructMethodsOf: the method 'postConstructMethod' was successfully invoked
+19:14:27: EJBHandler: invoke: toString called
+19:14:27: Container: invokePreDestroyMethodsOf: Invoking the pre destroy methods
+19:14:27: Container: invokePreDestroyMethodsOf: trying to invoke the method 'preDestroyMethod'
+19:14:27: StatelessBean: preDestroyMethod: Pre Destroyed !
+19:14:27: Container: invokePreDestroyMethodsOf: the method 'preDestroyMethod' was successfully invoked
+19:14:27: EJBHandler: invoke: result is : fr.isima.ejb.container.tests.mocks.StatelessBean@78f110cb
+19:14:27: EJBHandler: invoke: result is : fr.isima.ejb.container.tests.mocks.StatelessBean@78f110cb
+19:14:27: Container: handleAnnotations: Handling annotations
+19:14:27: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:27: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:14:27: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:14:27: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:14:27: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:14:27: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:28: Container: invokePostConstructMethodsOf: Invoking the post construct methods
+19:14:28: Container: invokePostConstructMethodsOf: trying to invoke the method 'postConstructMethod'
+19:14:28: StatelessBean: postConstructMethod: Post Constructed !
+19:14:28: Container: invokePostConstructMethodsOf: the method 'postConstructMethod' was successfully invoked
+19:14:28: EJBHandler: invoke: isPostConstructed is called with params : null
+19:14:28: Container: invokePreDestroyMethodsOf: Invoking the pre destroy methods
+19:14:28: Container: invokePreDestroyMethodsOf: trying to invoke the method 'preDestroyMethod'
+19:14:28: StatelessBean: preDestroyMethod: Pre Destroyed !
+19:14:28: Container: invokePreDestroyMethodsOf: the method 'preDestroyMethod' was successfully invoked
+19:14:28: EJBHandler: invoke: result is : true
+19:14:28: Container: handleAnnotations: Handling annotations
+19:14:28: Container: handleEjbAnnotation: Handling @EJB annotations
+19:14:28: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:14:28: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:14:28: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:14:28: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:14:28: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:14:28: Container: invokePostConstructMethodsOf: Invoking the post construct methods
+19:14:28: Container: invokePostConstructMethodsOf: trying to invoke the method 'postConstructMethod'
+19:14:28: StatelessBean: postConstructMethod: Post Constructed !
+19:14:28: Container: invokePostConstructMethodsOf: the method 'postConstructMethod' was successfully invoked
+19:14:28: EJBHandler: invoke: isPreDestroyed is called with params : null
+19:14:28: Container: invokePreDestroyMethodsOf: Invoking the pre destroy methods
+19:14:28: Container: invokePreDestroyMethodsOf: trying to invoke the method 'preDestroyMethod'
+19:14:28: StatelessBean: preDestroyMethod: Pre Destroyed !
+19:14:28: Container: invokePreDestroyMethodsOf: the method 'preDestroyMethod' was successfully invoked
+19:14:28: EJBHandler: invoke: result is : true
+19:24:31: Container: handleAnnotations: Handling annotations
+19:24:31: Container: handleEjbAnnotation: Handling @EJB annotations
+19:24:31: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:24:31: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:24:31: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:24:31: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:24:31: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:24:31: Container: handleAnnotations: Handling annotations
+19:24:31: Container: handleEjbAnnotation: Handling @EJB annotations
+19:24:31: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:24:31: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:24:31: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:24:31: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:24:31: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:24:31: Container: handleAnnotations: Handling annotations
+19:24:31: Container: handleEjbAnnotation: Handling @EJB annotations
+19:24:31: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:24:31: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:24:31: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:24:31: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:24:31: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:24:31: Container: handleAnnotations: Handling annotations
+19:24:31: Container: handleEjbAnnotation: Handling @EJB annotations
+19:24:31: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:24:31: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:24:31: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:24:31: Container: handleAnnotations: Handling annotations
+19:24:31: Container: handleEjbAnnotation: Handling @EJB annotations
+19:24:31: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:24:31: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:24:31: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:24:32: Container: invokePostConstructMethodsOf: Invoking the post construct methods
+19:24:32: EJBHandler: invoke: equals called
+19:24:32: EJBHandler: invoke: getBean called
+19:24:32: EJBHandler: invoke: result is : fr.isima.ejb.container.tests.mocks.SingletonBean@7dfd1169
+19:24:32: EJBHandler: invoke: result is : true
+19:24:32: Container: handleAnnotations: Handling annotations
+19:24:32: Container: handleEjbAnnotation: Handling @EJB annotations
+19:24:32: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:24:32: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:24:32: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:24:32: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:24:32: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:24:32: EJBHandler: invoke: getInnerBean is called with params : null
+19:24:32: StatelessBean: <init>: Constructed StateLessBean
+19:24:32: Container: handleAnnotations: Handling annotations
+19:24:32: Container: handleEjbAnnotation: Handling @EJB annotations
+19:24:32: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:24:32: Container: invokePostConstructMethodsOf: Invoking the post construct methods
+19:24:32: Container: invokePostConstructMethodsOf: trying to invoke the method 'postConstructMethod'
+19:24:32: StatelessBean: postConstructMethod: Post Constructed !
+19:24:32: Container: invokePostConstructMethodsOf: the method 'postConstructMethod' was successfully invoked
+19:24:32: EJBHandler: invoke: toString called
+19:24:32: Container: invokePreDestroyMethodsOf: Invoking the pre destroy methods
+19:24:32: Container: invokePreDestroyMethodsOf: trying to invoke the method 'preDestroyMethod'
+19:24:32: StatelessBean: preDestroyMethod: Pre Destroyed !
+19:24:32: Container: invokePreDestroyMethodsOf: the method 'preDestroyMethod' was successfully invoked
+19:24:32: EJBHandler: invoke: result is : fr.isima.ejb.container.tests.mocks.StatelessBean@46496daa
+19:24:32: EJBHandler: invoke: result is : fr.isima.ejb.container.tests.mocks.StatelessBean@46496daa
+19:24:32: Container: handleAnnotations: Handling annotations
+19:24:32: Container: handleEjbAnnotation: Handling @EJB annotations
+19:24:32: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:24:32: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:24:32: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:24:32: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:24:32: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:24:32: Container: invokePostConstructMethodsOf: Invoking the post construct methods
+19:24:32: Container: invokePostConstructMethodsOf: trying to invoke the method 'postConstructMethod'
+19:24:32: StatelessBean: postConstructMethod: Post Constructed !
+19:24:32: Container: invokePostConstructMethodsOf: the method 'postConstructMethod' was successfully invoked
+19:24:32: EJBHandler: invoke: isPostConstructed is called with params : null
+19:24:32: Container: invokePreDestroyMethodsOf: Invoking the pre destroy methods
+19:24:32: Container: invokePreDestroyMethodsOf: trying to invoke the method 'preDestroyMethod'
+19:24:32: StatelessBean: preDestroyMethod: Pre Destroyed !
+19:24:32: Container: invokePreDestroyMethodsOf: the method 'preDestroyMethod' was successfully invoked
+19:24:32: EJBHandler: invoke: result is : true
+19:24:32: Container: handleAnnotations: Handling annotations
+19:24:32: Container: handleEjbAnnotation: Handling @EJB annotations
+19:24:32: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.StatelessBeanInterface
+19:24:32: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.StatelessBean
+19:24:32: Container: handleEjbAnnotation: Found an EJB with the interface fr.isima.ejb.container.tests.mocks.SingletonBeanInterface
+19:24:32: Container: handleEjbAnnotation: The corresponding class is fr.isima.ejb.container.tests.mocks.SingletonBean
+19:24:32: Container: handlePersistenceAnnotation: Handling @PersistenceContext annotations
+19:24:32: Container: invokePostConstructMethodsOf: Invoking the post construct methods
+19:24:32: Container: invokePostConstructMethodsOf: trying to invoke the method 'postConstructMethod'
+19:24:32: StatelessBean: postConstructMethod: Post Constructed !
+19:24:32: Container: invokePostConstructMethodsOf: the method 'postConstructMethod' was successfully invoked
+19:24:32: EJBHandler: invoke: isPreDestroyed is called with params : null
+19:24:32: Container: invokePreDestroyMethodsOf: Invoking the pre destroy methods
+19:24:32: Container: invokePreDestroyMethodsOf: trying to invoke the method 'preDestroyMethod'
+19:24:32: StatelessBean: preDestroyMethod: Pre Destroyed !
+19:24:32: Container: invokePreDestroyMethodsOf: the method 'preDestroyMethod' was successfully invoked
+19:24:32: EJBHandler: invoke: result is : true

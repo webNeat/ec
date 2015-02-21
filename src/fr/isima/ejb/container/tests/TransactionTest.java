@@ -10,6 +10,7 @@ import fr.isima.ejb.container.Transaction;
 import fr.isima.ejb.container.annotations.TransactionAttribute;
 import fr.isima.ejb.container.exceptions.LocalAllInterfacesUnfoundException;
 import fr.isima.ejb.container.exceptions.NoLocalInterfaceIsImplemented;
+import fr.isima.ejb.container.exceptions.SingletonBeanMakingExecption;
 import fr.isima.ejb.container.logging.Logger;
 import fr.isima.ejb.container.tests.mocks.EjbClient;
 
@@ -19,8 +20,8 @@ public class TransactionTest {
 	@Before
 	public void init(){
 		try {
-			ejbContainer = Container.getContanier();			
-		} catch (LocalAllInterfacesUnfoundException | NoLocalInterfaceIsImplemented e) {
+			ejbContainer = Container.getInstance();			
+		} catch (LocalAllInterfacesUnfoundException | NoLocalInterfaceIsImplemented | SingletonBeanMakingExecption e) {
 			Logger.log(e.getMessage());
 			Assert.assertTrue(false);
 		}
